@@ -17,6 +17,23 @@ DB_PASSWORD = "testPassword"
 DB_DATABASE = "testDatabase"
 DB_TABLE = "testTable"
 ```
+* Create a json file with name `accounts.json` and put multiple accounts in following format:
+```
+[
+    {
+        "account_number": 123,
+        "password": "pwd1",
+        "server": "test-server-1",
+        "email": "abc@test.com" 
+    },
+    {
+        "account_number": 456,
+        "password": "pwd2",
+        "server": "test-server-2",
+        "email": "abc@test.com" 
+    }
+]
+```
 
 ### Run:
 * Command to run scraper: `python main.py`
