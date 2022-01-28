@@ -67,6 +67,7 @@ class MetaTrader:
                      'external_id'], axis=1, inplace=True)
             df['_date'] = today_date
             df['login'] = account_number
+            df = df.astype({"time": str})
             return df.to_dict("records")
 
     def get_trade_history(self, today_date=None, account_number=None):
@@ -101,6 +102,7 @@ class MetaTrader:
             df['time_done'] = pd.to_datetime(df['time_done'], unit='s')
             df['_date'] = today_date
             df['login'] = account_number
+            df = df.astype({"time_setup": str, "time_done": str})
             return df.to_dict("records")
 
     def close_connection(self):
