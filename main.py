@@ -23,8 +23,12 @@ def calculate_max_loss(data, mtrader):
             bid_price = symbol_ticke_info["bid"]
 
     # Max Loss calculation
-    max_loss = (data["volume"] * 100000 *
-                (data["price_open"] - data["sl"])) / bid_price
+    if data["type"] == 1:
+        max_loss = (data["volume"] * 100000 *
+                    (data["price_open"] - data["sl"])) / bid_price
+    else:
+        max_loss = (data["volume"] * 100000 *
+                    (data["sl"] - data["price_open"])) / bid_price
 
     if quote_pair == "XAG":
         max_loss = max_loss / 20
