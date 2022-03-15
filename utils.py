@@ -67,6 +67,7 @@ TABLES_MAPPING = {
             "comment",
             "login",
             "_date",
+            "max_loss",
         ]
     },
     "trade_history": {
@@ -89,6 +90,20 @@ TABLES_MAPPING = {
             "external_id",
             "login",
             "_date",
+        ]
+    },
+    "portfolio_account": {
+        "where_columns": ["account_name", "_date"],
+        "columns": [
+            "account_name",
+            "deposits",
+            "balance",
+            "profit",
+            "equity",
+            "pnl_percentage",
+            "_date",
+            "at_risk",
+            "margin_free"
         ]
     },
 }

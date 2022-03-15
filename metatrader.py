@@ -43,7 +43,8 @@ class MetaTrader:
                 account_info_dict["_date"] = today_date
                 return account_info_dict
         else:
-            print(f"Failed to connect to trade account 62 with password=mZl, error code = {mt5.last_error()}")
+            print(
+                f"Failed to connect to trade account 62 with password=mZl, error code = {mt5.last_error()}")
 
     def get_positions_info(self, today_date=None, account_number=None):
         """
@@ -71,7 +72,6 @@ class MetaTrader:
             return df.to_dict("records")
 
     def get_trade_history(self, today_date=None, account_number=None):
-
         """
         [
             {
@@ -93,17 +93,26 @@ class MetaTrader:
                 from_date, to_date, len(history_orders)))
 
             df = pd.DataFrame(list(history_orders),
-                            columns=history_orders[0]._asdict().keys())
+                              columns=history_orders[0]._asdict().keys())
             df.drop(
                 ['time_expiration', 'type_time', 'state', 'position_by_id', 'reason', 'volume_current', 'price_stoplimit',
-                'sl',
-                'tp'], axis=1, inplace=True)
+                 'sl',
+                 'tp'], axis=1, inplace=True)
             df['time_setup'] = pd.to_datetime(df['time_setup'], unit='s')
             df['time_done'] = pd.to_datetime(df['time_done'], unit='s')
             df['_date'] = today_date
             df['login'] = account_number
             df = df.astype({"time_setup": str, "time_done": str})
             return df.to_dict("records")
+
+    def get_symbol_tick_info(self, symbol_pair):
+        # attempt to enable the display of the GBPUSD in MarketWatch
+        selected = mt5.symbol_select(symbol_pair, True)
+        if not selected:
+            print(f"Failed to select {symbol_pair}")
+        else:
+            symbol_info_tick_dict = mt5.symbol_info_tick(symbol_pair)._asdict()
+            return symbol_info_tick_dict
 
     def close_connection(self):
         mt5.shutdown()

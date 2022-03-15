@@ -1,5 +1,6 @@
 ### Description:
 The purpose of this script is scraper different types of data from MetaTrader5 tool and populate in database accordingly
+Download Link: https://cloud.go.pepperstone.com/go-to?page=pepperstone-uk-mt5-win
 
 ### PreReqs:
 * Python: 3.6+
